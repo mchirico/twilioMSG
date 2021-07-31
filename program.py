@@ -16,7 +16,7 @@ def main():
         print(f"  {sms.body}\n\n")
         count += 1
 
-        if count > 30:
+        if count > 10:
             return
         
 
