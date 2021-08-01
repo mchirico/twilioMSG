@@ -2,7 +2,7 @@
 import requests, os, json, subprocess
 
 from twilio.rest import Client
-import os
+import os,time
 
 
 class TW:
@@ -17,7 +17,7 @@ class TW:
         out = []
         for sms in self.client.messages.list():
             if sms.direction == "inbound":
-                out.append([sms.date_sent,sms.sid,sms.from_,sms.body])
+                out.append([sms.date_sent.strftime('%Y-%m-%d %H:%M:%S'),sms.sid,sms.from_,sms.body])
             count += 1
             if count > 20:
                 return out
