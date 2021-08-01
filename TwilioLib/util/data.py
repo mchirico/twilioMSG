@@ -1,6 +1,27 @@
 
 import requests, os, json, subprocess
 
+from twilio.rest import Client
+import os
+
+
+class TW:
+    account_sid = os.getenv('TWILIO_API_KEY')
+    auth_token = os.environ.get('TWILIO_API_SECRET')
+
+    def __init__(self):
+        self.client = Client(self.account_sid, self.auth_token)
+
+    def GetList(self):
+        count = 1
+        out = []
+        for sms in self.client.messages.list():
+            if sms.direction == "inbound":
+                out.append([sms.date_sent,sms.sid,sms.from_,sms.body])
+            count += 1
+            if count > 20:
+                return out
+
 
 
 class SRE:
